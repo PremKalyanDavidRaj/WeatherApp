@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="weather-app">
+        <!-- Header Section -->
+        <header>
+            <h1>Weather App</h1>
+            <p>Get the latest weather updates for your city</p>
+        </header>
+
+        <!-- Input Section -->
+        <section class="input-section">
+            <input type="text" id="city-input" placeholder="Enter city name">
+            <button onclick="getWeather()">Get Weather</button>
+            <button onclick="getLocationWeather()">Use My Location</button>
+        </section>
+
+        <!-- Weather Display Section -->
+        <section class="weather-display" id="weather-display">
+            <!-- Weather data will be injected here dynamically -->
+        </section>
+
+        <!-- Forecast Display Section (Optional) -->
+        <section class="forecast-display" id="forecast-display">
+            <!-- 5-day forecast data will be injected here dynamically -->
+        </section>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
