@@ -82,10 +82,6 @@ If you’d like to contribute to this project, please follow these steps:
 4. Push to the branch (`git push origin feature-branch-name`).
 5. Open a pull request.
 
-## License
-
-This project is licensed under the MIT License. See the `LICENSE` file for more information.
-
 ## Contact
 
 For any inquiries, please contact [Prem Kalyan David Raj](PremKalyanDavidRaj.Gai@unh.eedu).
