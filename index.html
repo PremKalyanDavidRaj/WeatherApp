@@ -8,28 +8,56 @@
 </head>
 <body>
     <div class="weather-app">
-        <!-- Header Section -->
+       
         <header>
             <h1>Weather App</h1>
             <p>Get the latest weather updates for your city</p>
         </header>
 
-        <!-- Input Section -->
+      
         <section class="input-section">
             <input type="text" id="city-input" placeholder="Enter city name">
             <button onclick="getWeather()">Get Weather</button>
             <button onclick="getLocationWeather()">Use My Location</button>
         </section>
 
-        <!-- Weather Display Section -->
+       
         <section class="weather-display" id="weather-display">
-            <!-- Weather data will be injected here dynamically -->
+         
         </section>
 
-        <!-- Forecast Display Section (Optional) -->
+    
         <section class="forecast-display" id="forecast-display">
-            <!-- 5-day forecast data will be injected here dynamically -->
+         
         </section>
+
+        <button id="info-button" onclick="showInfo()">Info</button>
+        <div id="info-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeInfo()">&times;</span>
+                <h2>Prem Kalyan David Raj Gai</h2>
+                <img src="premprofilepicture.jpg" alt="Prem Kalyan David Raj" class="profile-picture"> <!-- Your Picture -->
+                <h2>About PM Accelerator</h2>
+                <p>Overview</p>
+                <p>The Product Manager Accelerator Program is designed to support PM professionals through every stage of their career. From students looking for entry-level jobs to Directors looking to take on a leadership role, our program has helped over hundreds of students fulfill their career aspirations.</p>
+                <p>Our Product Manager Accelerator community are ambitious and committed. Through our program, they have learned, honed, and developed new PM and leadership skills, giving them a strong foundation for their future endeavors.</p>
+                <p>Learn product management for free today on our YouTube channel: <a href="https://www.youtube.com/c/drnancyli?sub_confirmation=1" target="_blank">YouTube Channel</a></p>
+                <p>Interested in PM Accelerator Pro?</p>
+                <ol>
+                    <li><strong>Step 1️⃣:</strong> Attend the <a href="https://www.drnancyli.com/masterclass" target="_blank">Product Masterclass</a> to learn more about the program details, price, different packages, and stay until the end to get a FREE AI Course.</li>
+                    <li><strong>Step 2️⃣:</strong> Reserve your early bird ticket and submit an application to talk to our Head of Admission.</li>
+                    <li><strong>Step 3️⃣:</strong> Successful applicants join our PMA Pro community to receive customized coaching!</li>
+                </ol>
+                <p>Website: <a href="http://www.drnancyli.com" target="_blank">www.drnancyli.com</a></p>
+                <p>Phone: +1 617-610-6855</p>
+                <p>Industry: E-Learning Providers</p>
+                <p>Company size: 2-10 employees</p>
+                <p>Headquarters: Boston, MA</p>
+                <p>Founded: 2020</p>
+                <p>Specialties: Product Management, Product Manager, Product Management Training, Product Management Certification, Product Lead, Product Executive, Associate Product Manager, Product Management Coaching, Product Manager Resume, Product Management Interview, VP of Product, Director of Product, Chief Product Officer.</p>
+                <button id="reset-info-button" onclick="closeInfo()">Go Back</button> 
+
+        </div>
     </div>
 
     <script src="app.js"></script>

@@ -1,7 +1,7 @@
-// Replace 'YOUR_API_KEY' with your actual OpenWeatherMap API key
+
 const apiKey = '533aa20b4bb9de297c084d942023b3e7';
 
-// Function to fetch and display weather based on city name
+
 async function getWeather() {
     const city = document.getElementById('city-input').value.trim();
     if (city === '') {
@@ -13,6 +13,8 @@ async function getWeather() {
         const data = await response.json();
         if (response.ok) {
             displayWeather(data);
+            addBackButton();
+            addResetButton();
         } else {
             alert(`Error: ${data.message}`);
         }
@@ -21,7 +23,6 @@ async function getWeather() {
     }
 }
 
-// Function to display the weather data on the webpage
 function displayWeather(data) {
     const weatherDisplay = document.getElementById('weather-display');
     weatherDisplay.innerHTML = `
@@ -31,11 +32,9 @@ function displayWeather(data) {
         <p>Humidity: ${data.main.humidity}%</p>
         <p>Wind Speed: ${data.wind.speed} m/s</p>
     `;
-    // Optionally call getForecast to display the 5-day forecast
     getForecast(data.name);
 }
 
-// Function to fetch and display the 5-day weather forecast
 async function getForecast(city) {
     try {
         const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`);
@@ -50,12 +49,11 @@ async function getForecast(city) {
     }
 }
 
-// Function to display the 5-day weather forecast on the webpage
 function displayForecast(data) {
     const forecastDisplay = document.getElementById('forecast-display');
     forecastDisplay.innerHTML = '<h3>5-Day Forecast</h3>';
     data.list.forEach((forecast, index) => {
-        if (index % 8 === 0) { // Every 8th item corresponds to a new day (3-hour intervals, so 8 items per day)
+        if (index % 8 === 0) { 
             const forecastDate = new Date(forecast.dt * 1000).toDateString();
             forecastDisplay.innerHTML += `
                 <div>
@@ -69,7 +67,6 @@ function displayForecast(data) {
     });
 }
 
-// Function to fetch and display weather based on user's geolocation
 function getLocationWeather() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(async (position) => {
@@ -80,16 +77,102 @@ function getLocationWeather() {
                 const data = await response.json();
                 if (response.ok) {
                     displayWeather(data);
+                    addBackButton();
+                    addResetButton();
                 } else {
-                    alert(`Error: ${data.message}`);
+                    showError(`Error: ${data.message}`);
                 }
             } catch (error) {
-                alert('Failed to fetch weather data. Please try again later.');
+                showError('Failed to fetch weather data. Please try again later.');
             }
         }, () => {
-            alert('Geolocation permission denied. Please enter a city manually.');
+            showError('Geolocation permission denied. Please enter a city manually.');
         });
     } else {
-        alert('Geolocation is not supported by this browser.');
+        showError('Geolocation is not supported by this browser.');
     }
+}
+
+function showError(message) {
+    const weatherDisplay = document.getElementById('weather-display');
+    const forecastDisplay = document.getElementById('forecast-display');
+    
+    weatherDisplay.innerHTML = '';
+    forecastDisplay.innerHTML = '';
+    
+    weatherDisplay.innerHTML = `<p class="error">${message}</p>`;
+}
+
+function clearError() {
+    const weatherDisplay = document.getElementById('weather-display');
+    const forecastDisplay = document.getElementById('forecast-display');
+    weatherDisplay.innerHTML = '';
+    forecastDisplay.innerHTML = '';
+}
+
+
+function goBack() {
+    window.history.back();
+}
+
+function resetApp() {
+    document.getElementById('city-input').value = '';
+    document.getElementById('weather-display').innerHTML = '';
+    document.getElementById('forecast-display').innerHTML = '';
+    removeBackButton();
+    removeResetButton();
+}
+
+
+function addBackButton() {
+    const weatherApp = document.querySelector('.weather-app');
+    if (!document.getElementById('back-button')) {
+        const backButton = document.createElement('button');
+        backButton.id = 'back-button';
+        backButton.innerText = 'Go Back';
+        backButton.onclick = goBack;
+        weatherApp.appendChild(backButton);
+    }
+}
+
+function addResetButton() {
+    const weatherApp = document.querySelector('.weather-app');
+    if (!document.getElementById('reset-button')) {
+        const resetButton = document.createElement('button');
+        resetButton.id = 'reset-button';
+        resetButton.innerText = 'Reset';
+        resetButton.onclick = resetApp;
+        weatherApp.appendChild(resetButton);
+    }
+}
+
+function removeBackButton() {
+    const backButton = document.getElementById('back-button');
+    if (backButton) {
+        backButton.remove();
+    }
+}
+
+function removeResetButton() {
+    const resetButton = document.getElementById('reset-button');
+    if (resetButton) {
+        resetButton.remove();
+    }
+}
+
+
+
+function showInfo() {
+    const modal = document.getElementById('info-modal');
+    modal.style.display = "block";
+}
+
+function closeInfo() {
+    const modal = document.getElementById('info-modal');
+    modal.style.display = "none";
+}
+
+function closeInfo() {
+    const modal = document.getElementById('info-modal');
+    modal.style.display = "none";
 }
